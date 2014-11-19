@@ -5,6 +5,7 @@
  */
 package GUIs;
 
+import javax.swing.JOptionPane;
 import models.NhanVien;
 import models.TaiKhoan;
 
@@ -15,6 +16,7 @@ import models.TaiKhoan;
 public class f_dangnhap extends javax.swing.JFrame {
             private String user;
             private String pass;
+            private byte   trangthai;
             private TaiKhoan taikhoan;
     /**
      * Creates new form f_dangnhap
@@ -131,9 +133,25 @@ public class f_dangnhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btndangnhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndangnhapMouseClicked
-        user = tftaikhoan.getText();
-        pass = tfmatkhau.getText();
-        taikhoan = new TaiKhoan(user, pass);
+
+        user        = tftaikhoan.getText();
+        pass        = tfmatkhau.getText();
+        taikhoan    = new TaiKhoan(user, pass);
+        trangthai   = taikhoan.Check_TaiKhoan(user, pass);
+        if(trangthai != -128){
+            f_quanly trangquanly = new f_quanly();
+            trangquanly.setVisible(true);
+        }
+        else{
+         int i = JOptionPane.showConfirmDialog(this, "Tên đăng nhập hoặc mật khẩu chưa đúng vui lòng nhập lại");
+            if(i==0){
+                 tftaikhoan.setText("");
+                 tfmatkhau.setText("");
+            }
+          //  else this.
+         
+        }
+        
     }//GEN-LAST:event_btndangnhapMouseClicked
 
     /**

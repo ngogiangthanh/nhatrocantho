@@ -120,5 +120,9 @@ public class NhanVien extends Nguoi {
         cn.CloseDb();
         return All_nhanvien;      
     }
+
+    byte getQuyen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
    
 }

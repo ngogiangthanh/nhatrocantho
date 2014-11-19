@@ -51,7 +51,7 @@ public class TaiKhoan {
     }
 //ham kiem tra nhan vien neu la nhanvien se tra ve quyen, ko thi tra ve -128;
    //su dung Native Query
-    public byte Check_TaiKhoan(String user, String pass, byte permission){
+    public byte Check_TaiKhoan(String user, String pass){
         byte rs=-128;
         KetNoi cn = new KetNoi();
         ObjectContainer db = cn.GetDb();
