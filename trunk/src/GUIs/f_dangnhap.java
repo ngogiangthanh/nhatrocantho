@@ -5,15 +5,28 @@
  */
 package GUIs;
 
+import models.NhanVien;
+import models.TaiKhoan;
+
 /**
  *
  * @author lenovo
  */
 public class f_dangnhap extends javax.swing.JFrame {
-
+            private String user;
+            private String pass;
+            private TaiKhoan taikhoan;
     /**
      * Creates new form f_dangnhap
      */
+    
+            public String getUser(){
+                return this.user;
+            }
+            
+             public String getPass(){
+                return this.pass;
+            }
     public f_dangnhap() {
         initComponents();
     }
@@ -44,6 +57,11 @@ public class f_dangnhap extends javax.swing.JFrame {
         lbmatkhau.setText("Mật khẩu:");
 
         btndangnhap.setText("Đăng nhập");
+        btndangnhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btndangnhapMouseClicked(evt);
+            }
+        });
 
         btnlamlai.setText("Làm lại");
 
@@ -111,6 +129,12 @@ public class f_dangnhap extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btndangnhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btndangnhapMouseClicked
+        user = tftaikhoan.getText();
+        pass = tfmatkhau.getText();
+        taikhoan = new TaiKhoan(user, pass);
+    }//GEN-LAST:event_btndangnhapMouseClicked
 
     /**
      * @param args the command line arguments

@@ -117,10 +117,8 @@ public class NhanVien extends Nguoi {
         KetNoi cn = new KetNoi();
         ObjectContainer db = cn.GetDb();
         ObjectSet<NhanVien> All_nhanvien = db.queryByExample(NhanVien.class);
-        for(NhanVien nv : All_nhanvien){
-            rs.add(nv);
-        }
-        return rs;
-        
+        cn.CloseDb();
+        return All_nhanvien;      
     }
+   
 }
