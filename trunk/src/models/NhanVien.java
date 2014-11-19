@@ -1,5 +1,7 @@
 package models;
 
+import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import java.util.*;
 
 public class NhanVien extends Nguoi {
@@ -108,5 +110,17 @@ public class NhanVien extends Nguoi {
     protected void setIsDel(boolean isDel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+//ham tim kim tat ca nhan vien
+    public List<NhanVien> GetAll(){
+        List<NhanVien> rs = new ArrayList<NhanVien>();
+        KetNoi cn = new KetNoi();
+        ObjectContainer db = cn.GetDb();
+        ObjectSet<NhanVien> All_nhanvien = db.queryByExample(NhanVien.class);
+        for(NhanVien nv : All_nhanvien){
+            rs.add(nv);
+        }
+        return rs;
+        
+    }
 }
