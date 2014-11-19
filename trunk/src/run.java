@@ -1,4 +1,5 @@
 
+import GUIs.f_dangnhap;
 import configs.Config;
 
 /*
@@ -12,7 +13,9 @@ import configs.Config;
  */
 public class run {
     public static void main(String[] args) {
-       Config conn = new Config();
-       conn.closeConn();
+//       Config conn = new Config();
+//       conn.closeConn();
+        f_dangnhap dangnhap = new f_dangnhap();
+        dangnhap.setVisible(true);
     }
 }
