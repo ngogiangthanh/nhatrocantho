@@ -5,6 +5,14 @@
  */
 package GUIs;
 
+import com.db4o.ObjectSet;
+import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import models.NhanVien;
+import models.TaiKhoan;
+
 /**
  *
  * @author lenovo
@@ -14,6 +22,42 @@ public class f_quanly extends javax.swing.JFrame {
     /**
      * Creates new form f_quanly
      */
+    private TaiKhoan QuanLy;
+    private ObjectSet<NhanVien> DSNhanVien;
+    private JTable jtable = new JTable();
+    private DefaultTableModel tableModel = new DefaultTableModel();
+    
+    public f_quanly(TaiKhoan QL){
+        try {            
+        NhanVien nv = new NhanVien();
+        this.QuanLy = QL;
+        DSNhanVien  = nv.GetAll();
+        //tao title cho bang
+        String value[]= {"MSNV", "Họ Tên Nhân Viên", "Giới Tính"};
+        tableModel.setColumnIdentifiers(value);
+        jtable.setModel(tableModel);
+        initComponents();
+// tableModel.setColumnIdentifiers(value);
+        //chuyen dl tu DSnhanvien vao bang
+        String data[] = new String[3];
+        if(DSNhanVien.isEmpty()){
+        } 
+        else {
+            for(NhanVien getnv : DSNhanVien){
+                    data[0]=getnv.getMSNV();
+                    data[1]=getnv.getNguoidung().getTaikhoan();
+                    data[2]=getnv.getGioiTinh().name();
+                };
+                tableModel.addRow(data);
+            }
+        }catch (Exception e) {}
+        } 
+        
+        
+    
+   
+ 
+    
     public f_quanly() {
         initComponents();
     }
@@ -33,8 +77,6 @@ public class f_quanly extends javax.swing.JFrame {
         btnxoa = new javax.swing.JButton();
         tftim = new javax.swing.JTextField();
         btntim = new javax.swing.JButton();
-        sptable = new javax.swing.JScrollPane();
-        tbnhanvien = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,19 +87,6 @@ public class f_quanly extends javax.swing.JFrame {
         btnxoa.setText("Xóa");
 
         btntim.setText("Tìm");
-
-        tbnhanvien.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        sptable.setViewportView(tbnhanvien);
 
         javax.swing.GroupLayout pnchinhLayout = new javax.swing.GroupLayout(pnchinh);
         pnchinh.setLayout(pnchinhLayout);
@@ -73,8 +102,7 @@ public class f_quanly extends javax.swing.JFrame {
                 .addComponent(btnsua)
                 .addGap(13, 13, 13)
                 .addComponent(btnxoa)
-                .addContainerGap(509, Short.MAX_VALUE))
-            .addComponent(sptable)
+                .addContainerGap(477, Short.MAX_VALUE))
         );
         pnchinhLayout.setVerticalGroup(
             pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +113,7 @@ public class f_quanly extends javax.swing.JFrame {
                     .addComponent(btnthem)
                     .addComponent(btnsua)
                     .addComponent(btnxoa))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sptable, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
+                .addContainerGap(863, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -150,8 +177,6 @@ public class f_quanly extends javax.swing.JFrame {
     private javax.swing.JButton btntim;
     private javax.swing.JButton btnxoa;
     private javax.swing.JPanel pnchinh;
-    private javax.swing.JScrollPane sptable;
-    private javax.swing.JTable tbnhanvien;
     private javax.swing.JTextField tftim;
     // End of variables declaration//GEN-END:variables
 }

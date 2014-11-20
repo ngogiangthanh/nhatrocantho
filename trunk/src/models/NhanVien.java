@@ -20,6 +20,10 @@ public class NhanVien extends Nguoi {
         this.nguoidung = nguoidung;
         this.dshopdong = dshopdong;
     }
+    
+     public NhanVien(TaiKhoan nguoidung) {
+        this.nguoidung = nguoidung;
+    }
 
     public Set<HopDong> getDshopdong() {
         return dshopdong;
@@ -112,17 +116,36 @@ public class NhanVien extends Nguoi {
     }
     
 //ham tim kim tat ca nhan vien
-    public List<NhanVien> GetAll(){
-        List<NhanVien> rs = new ArrayList<NhanVien>();
+    public ObjectSet<NhanVien> GetAll(){
+        try {
+            NhanVien t = new NhanVien();
         KetNoi cn = new KetNoi();
         ObjectContainer db = cn.GetDb();
-        ObjectSet<NhanVien> All_nhanvien = db.queryByExample(NhanVien.class);
+        ObjectSet<NhanVien> All_nhanvien = db.queryByExample(t);
+       // if(!All_nhanvien.isEmpty()){
+          //  System.out.println("da vao");
+           // for(NhanVien nv : All_nhanvien){
+                //System.out.print(nv.MSNV);
+            //}
+       // }
         cn.CloseDb();
-        return All_nhanvien;      
+        return All_nhanvien;    
+        } catch (Exception e) {
+            return null;
+        }
+        
+          
     }
 
     byte getQuyen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-   
+  // ham lay tai khoang
+    public TaiKhoan getTaiKhoan(){
+        return this.nguoidung;
+    }
+   //ham lay gioi tinh
+    public GioiTinh getGioiTinh(){
+        return this.gioitinh;
+    }
 }

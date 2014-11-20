@@ -9,6 +9,11 @@ import java.io.File;
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.ext.DatabaseFileLockedException;
+import com.db4o.ext.DatabaseReadOnlyException;
+import com.db4o.ext.Db4oIOException;
+import com.db4o.ext.IncompatibleFileFormatException;
+import com.db4o.ext.OldFormatException;
 import javax.swing.JOptionPane;
 /**
  *
@@ -20,7 +25,7 @@ public class KetNoi {
     public KetNoi(){
         try {
             this.db = Db4oEmbedded.openFile("E:\\thac_si\\hk1_2014\\CSDL_HDT\\nhatrocantho\\src\\database\\containers.dbo");
-        } catch (Exception e) {
+        } catch (Db4oIOException | DatabaseFileLockedException | IncompatibleFileFormatException | OldFormatException | DatabaseReadOnlyException e) {
             JOptionPane.showMessageDialog(null, "Không thể thưc hiện chương trình vì lý do kỹ thuật");
         }
         
