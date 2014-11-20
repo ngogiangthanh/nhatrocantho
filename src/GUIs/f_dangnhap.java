@@ -131,7 +131,8 @@ public class f_dangnhap extends javax.swing.JFrame {
         taikhoan    = new TaiKhoan(user, pass);
         trangthai   = taikhoan.Check_TaiKhoan(user, pass);
         if(trangthai != -128){
-            f_quanly trangquanly = new f_quanly();
+            f_quanly trangquanly = new f_quanly(taikhoan);
+            this.setVisible(false);
             trangquanly.setVisible(true);
         }
         else{
