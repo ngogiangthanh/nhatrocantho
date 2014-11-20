@@ -5,6 +5,7 @@
  */
 package GUIs;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import models.NhanVien;
 import models.TaiKhoan;
@@ -48,7 +49,6 @@ public class f_dangnhap extends javax.swing.JFrame {
         tftaikhoan = new javax.swing.JTextField();
         tfmatkhau = new javax.swing.JTextField();
         btndangnhap = new javax.swing.JButton();
-        btnlamlai = new javax.swing.JButton();
         btnthoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,8 +65,6 @@ public class f_dangnhap extends javax.swing.JFrame {
             }
         });
 
-        btnlamlai.setText("Làm lại");
-
         btnthoat.setText("Thoát");
 
         javax.swing.GroupLayout pnchinhLayout = new javax.swing.GroupLayout(pnchinh);
@@ -74,24 +72,19 @@ public class f_dangnhap extends javax.swing.JFrame {
         pnchinhLayout.setHorizontalGroup(
             pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnchinhLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnchinhLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbmatkhau)
-                            .addComponent(lbtaikhoan))
-                        .addGap(61, 61, 61)
-                        .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfmatkhau, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                            .addComponent(tftaikhoan)))
-                    .addGroup(pnchinhLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                    .addComponent(lbmatkhau)
+                    .addComponent(lbtaikhoan))
+                .addGap(61, 61, 61)
+                .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(tfmatkhau, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnchinhLayout.createSequentialGroup()
                         .addComponent(btndangnhap)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnlamlai)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnthoat)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnthoat, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tftaikhoan))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         pnchinhLayout.setVerticalGroup(
             pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,12 +97,11 @@ public class f_dangnhap extends javax.swing.JFrame {
                 .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfmatkhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbmatkhau))
-                .addGap(44, 44, 44)
+                .addGap(27, 27, 27)
                 .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btndangnhap)
-                    .addComponent(btnlamlai)
-                    .addComponent(btnthoat))
-                .addContainerGap(96, Short.MAX_VALUE))
+                    .addComponent(btnthoat)
+                    .addComponent(btndangnhap))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,7 +140,10 @@ public class f_dangnhap extends javax.swing.JFrame {
                  tftaikhoan.setText("");
                  tfmatkhau.setText("");
             }
-          //  else this.
+           else {
+                this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                System.exit(0);
+            }
          
         }
         
@@ -191,7 +186,6 @@ public class f_dangnhap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btndangnhap;
-    private javax.swing.JButton btnlamlai;
     private javax.swing.JButton btnthoat;
     private javax.swing.JLabel lbmatkhau;
     private javax.swing.JLabel lbtaikhoan;

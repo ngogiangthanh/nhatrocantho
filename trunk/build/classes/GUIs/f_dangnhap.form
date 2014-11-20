@@ -49,30 +49,23 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbmatkhau" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbtaikhoan" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tfmatkhau" pref="145" max="32767" attributes="0"/>
-                              <Component id="tftaikhoan" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                          <Component id="btndangnhap" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnlamlai" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnthoat" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lbmatkhau" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbtaikhoan" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="tfmatkhau" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="btndangnhap" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnthoat" min="-2" pref="85" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="tftaikhoan" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="45" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,13 +82,12 @@
                       <Component id="tfmatkhau" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbmatkhau" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btndangnhap" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnlamlai" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnthoat" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btndangnhap" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="96" max="32767" attributes="0"/>
+                  <EmptySpace pref="113" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -122,11 +114,6 @@
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btndangnhapMouseClicked"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnlamlai">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="L&#xe0;m l&#x1ea1;i"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnthoat">
           <Properties>
