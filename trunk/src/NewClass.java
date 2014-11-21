@@ -19,14 +19,14 @@ import models.TaiKhoan;
  * @author Dinh Nhan
  */
 public class NewClass {
-   /*  public static void main(String[] args) {
+    /* public static void main(String[] args) {
          try {
              
       ObjectContainer db = Db4oEmbedded.openFile("E:\\thac_si\\hk1_2014\\CSDL_HDT\\nhatrocantho\\src\\database\\containers.dbo");
         TaiKhoan tk = new TaiKhoan("nhan2", "nhan2", (byte) 0.0);
         NhanVien nv = new NhanVien("M25", tk, null);
         ObjectSet<NhanVien> All_nhanvien = db.queryByExample(nv);
-             System.out.println(nv.getMSNV());
+             System.out.print(All_nhanvien.get(0).getMSNV());
         db.close();
         } catch (Db4oIOException | DatabaseClosedException e) {
             System.out.println("loi");

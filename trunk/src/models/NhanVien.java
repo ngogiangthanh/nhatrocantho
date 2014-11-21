@@ -2,6 +2,7 @@ package models;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import java.util.*;
 
 public class NhanVien extends Nguoi {
@@ -116,21 +117,24 @@ public class NhanVien extends Nguoi {
     }
     
 //ham tim kim tat ca nhan vien
-    public ObjectSet<NhanVien> GetAll(){
+    public List<NhanVien> GetAll(){
         try {
-            NhanVien t = new NhanVien();
+           // NhanVien t = new NhanVien(null);
         KetNoi cn = new KetNoi();
-        ObjectContainer db = cn.GetDb();
-        ObjectSet<NhanVien> All_nhanvien = db.queryByExample(t);
-       // if(!All_nhanvien.isEmpty()){
-          //  System.out.println("da vao");
-           // for(NhanVien nv : All_nhanvien){
-                //System.out.print(nv.MSNV);
-            //}
-       // }
+        Query query = cn.GetDb().query();
+        query.constrain(NhanVien.class);
+        List<NhanVien> All_nhanvien = query.execute();
+        System.out.print(All_nhanvien.size());
+        /* if(!All_nhanvien.isEmpty()){
+            System.out.println("da vao");
+            for(NhanVien nv : All_nhanvien){
+                System.out.print(nv.MSNV);
+            }
+        }*/
         cn.CloseDb();
-        return All_nhanvien;    
+        return  All_nhanvien;    
         } catch (Exception e) {
+            System.out.print("loi");
             return null;
         }
         
