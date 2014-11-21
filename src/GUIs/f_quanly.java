@@ -7,6 +7,7 @@ package GUIs;
 
 import com.db4o.ObjectSet;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -23,35 +24,34 @@ public class f_quanly extends javax.swing.JFrame {
      * Creates new form f_quanly
      */
     private TaiKhoan QuanLy;
-    private ObjectSet<NhanVien> DSNhanVien;
+    private List<NhanVien> DSNhanVien;
     private JTable jtable = new JTable();
     private DefaultTableModel tableModel = new DefaultTableModel();
     
     public f_quanly(TaiKhoan QL){
-        try {            
-        NhanVien nv = new NhanVien();
+        try {
+         initComponents();
+         NhanVien nv = new NhanVien();
         this.QuanLy = QL;
         DSNhanVien  = nv.GetAll();
-        //tao title cho bang
+        System.out.print(nv.GetAll().size());
+        System.out.print("da wa");
         String value[]= {"MSNV", "Họ Tên Nhân Viên", "Giới Tính"};
         tableModel.setColumnIdentifiers(value);
-        jtable.setModel(tableModel);
-        initComponents();
-// tableModel.setColumnIdentifiers(value);
-        //chuyen dl tu DSnhanvien vao bang
-        String data[] = new String[3];
-        if(DSNhanVien.isEmpty()){
-        } 
-        else {
-            for(NhanVien getnv : DSNhanVien){
-                    data[0]=getnv.getMSNV();
-                    data[1]=getnv.getNguoidung().getTaikhoan();
-                    data[2]=getnv.getGioiTinh().name();
-                };
-                tableModel.addRow(data);
-            }
+        this.tb_DSNV.setModel(tableModel);
+       
+        String data[]= new String[3];
+        data[0] = "1";
+        data[1] = "2";
+        data[2] = "3";
+        tableModel.addRow(data);                 
+            
+      
+                
+            
         }catch (Exception e) {}
-        } 
+
+    } 
         
         
     
@@ -77,6 +77,8 @@ public class f_quanly extends javax.swing.JFrame {
         btnxoa = new javax.swing.JButton();
         tftim = new javax.swing.JTextField();
         btntim = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tb_DSNV = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,20 +90,44 @@ public class f_quanly extends javax.swing.JFrame {
 
         btntim.setText("Tìm");
 
+        tb_DSNV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "MSNV", "Ho Tên", "Giới Tính"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tb_DSNV);
+
         javax.swing.GroupLayout pnchinhLayout = new javax.swing.GroupLayout(pnchinh);
         pnchinh.setLayout(pnchinhLayout);
         pnchinhLayout.setHorizontalGroup(
             pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnchinhLayout.createSequentialGroup()
-                .addComponent(tftim, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btntim)
-                .addGap(6, 6, 6)
-                .addComponent(btnthem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnsua)
-                .addGap(13, 13, 13)
-                .addComponent(btnxoa)
+                .addGroup(pnchinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnchinhLayout.createSequentialGroup()
+                        .addComponent(tftim, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btntim)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnthem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnsua)
+                        .addGap(13, 13, 13)
+                        .addComponent(btnxoa))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(477, Short.MAX_VALUE))
         );
         pnchinhLayout.setVerticalGroup(
@@ -113,7 +139,9 @@ public class f_quanly extends javax.swing.JFrame {
                     .addComponent(btnthem)
                     .addComponent(btnsua)
                     .addComponent(btnxoa))
-                .addContainerGap(863, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(425, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,7 +204,9 @@ public class f_quanly extends javax.swing.JFrame {
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btntim;
     private javax.swing.JButton btnxoa;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnchinh;
+    private javax.swing.JTable tb_DSNV;
     private javax.swing.JTextField tftim;
     // End of variables declaration//GEN-END:variables
 }
