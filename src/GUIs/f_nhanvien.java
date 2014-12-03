@@ -2,17 +2,23 @@ package GUIs;
 
 import configs.Config;
 import controllers.ChuNhaTroController;
+import controllers.NguoiThueController;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
 public class f_nhanvien extends javax.swing.JFrame {
 
     private final Config conn;
-    private ChuNhaTroController chus;
+    private final ChuNhaTroController chus;
+    private final NguoiThueController nguoithue;
 
     public f_nhanvien(Config conn) {
         this.conn = conn;
         this.chus = new ChuNhaTroController(this.conn);
+        this.nguoithue = new NguoiThueController(this.conn);
         initComponents();
     }
 
@@ -144,7 +150,7 @@ public class f_nhanvien extends javax.swing.JFrame {
 
         tbnguoithue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "STT", "CMND", "Họ tên", "Giới tính", "Công việc"
@@ -277,12 +283,13 @@ public class f_nhanvien extends javax.swing.JFrame {
     }//GEN-LAST:event_itemdangxuatActionPerformed
 
     private void itemthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemthoatActionPerformed
-        this.dispose();
+       this.conn.closeConn();
+       this.dispose();
     }//GEN-LAST:event_itemthoatActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
         chus.show(tbchunhatro);
+        this.nguoithue.show(this.tbnguoithue);
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
