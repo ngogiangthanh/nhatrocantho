@@ -141,6 +141,11 @@ public class f_nhanvien extends javax.swing.JFrame {
         tpchinh.addTab("Chủ nhà trọ", pnchunhatro);
 
         btnthemnguoithue.setText("Thêm");
+        btnthemnguoithue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthemnguoithueActionPerformed(evt);
+            }
+        });
 
         btnsuanguoithue.setText("Sửa");
 
@@ -295,6 +300,11 @@ public class f_nhanvien extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
        this.conn.closeConn();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnthemnguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemnguoithueActionPerformed
+       f_nguoithue_them nguoithue = f_nguoithue_them.getInstance(this.conn);
+       nguoithue.createAndShowUI();
+    }//GEN-LAST:event_btnthemnguoithueActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnrefreshchunhatro;
