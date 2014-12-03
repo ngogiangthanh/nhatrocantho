@@ -42,33 +42,33 @@ public class NhanVien extends Nguoi {
 
 
     @Override
-    protected String getCMND() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getCMND() {
+        return this.CMND;
     }
 
     @Override
-    protected String getHoten() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getHoten() {
+       return this.hoten;
     }
 
     @Override
-    protected Date getNgaysinh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Date getNgaysinh() {
+        return this.ngaysinh;
     }
 
     @Override
-    protected GioiTinh getGioitinh() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GioiTinh getGioitinh() {
+        return this.gioitinh;
     }
 
     @Override
-    protected String getSdt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getSdt() {
+        return this.sdt;
     }
 
     @Override
-    protected boolean getIsDel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean getIsDel() {
+       return this.isDel;
     }
 
     public void setMSNV(String MSNV) {
@@ -84,33 +84,33 @@ public class NhanVien extends Nguoi {
     }
 
     @Override
-    protected void setCMND(String CMND) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setCMND(String CMND) {
+        this.CMND=CMND;
     }
 
     @Override
-    protected void setHoten(String hoten) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setHoten(String hoten) {
+        this.hoten=hoten;
     }
 
     @Override
-    protected void setNgaysinh(Date ngaysinh) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setNgaysinh(Date ngaysinh) {
+        this.ngaysinh=ngaysinh;
     }
 
     @Override
-    protected void setGioitinh(GioiTinh gioitinh) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setGioitinh(GioiTinh gioitinh) {
+       this.gioitinh=gioitinh;
     }
 
     @Override
-    protected void setSdt(String sdt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setSdt(String sdt) {
+        this.sdt=sdt;
     }
 
     @Override
-    protected void setIsDel(boolean isDel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setIsDel(boolean isDel) {
+        this.isDel=isDel;
     }
    
     byte getQuyen() {

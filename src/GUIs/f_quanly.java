@@ -1,11 +1,14 @@
 package GUIs;
 
+import configs.Config;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 public class f_quanly extends javax.swing.JFrame {
-
-    public f_quanly() {
+   
+    private final Config conn;
+    public f_quanly(Config conn) {
+        this.conn = conn;
         initComponents();
     }
 
@@ -242,7 +245,7 @@ public class f_quanly extends javax.swing.JFrame {
     }//GEN-LAST:event_itemthongtinActionPerformed
 
     private void itemdangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemdangxuatActionPerformed
-        f_dangnhap dangnhap = f_dangnhap.getInstance();
+        f_dangnhap dangnhap = f_dangnhap.getInstance(this.conn);
         dangnhap.createAndShowUI();
         this.dispose();
     }//GEN-LAST:event_itemdangxuatActionPerformed

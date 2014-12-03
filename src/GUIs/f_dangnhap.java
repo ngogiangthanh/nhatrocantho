@@ -1,18 +1,21 @@
 package GUIs;
 
+import configs.Config;
 import javax.swing.JOptionPane;
 
 public class f_dangnhap extends javax.swing.JFrame {
 
     private static f_dangnhap _instance; //Kiểm tra sự tồn tại của 2 instance trong cùng 1 form
-
-    public f_dangnhap() {
+    
+    private Config conn;
+    public f_dangnhap(Config conn) {
+        this.conn = conn;
         initComponents();
     }
 
-    public static f_dangnhap getInstance() {
+    public static f_dangnhap getInstance(Config conn) {
         if (_instance == null) {
-            _instance = new f_dangnhap();
+            _instance = new f_dangnhap(conn);
         }
         return _instance;
     }
@@ -147,11 +150,11 @@ public class f_dangnhap extends javax.swing.JFrame {
     private void btndangnhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndangnhapActionPerformed
         String quyen = cbbquyen.getSelectedItem().toString();
         if ("Quản lý".equals(quyen)) {
-            f_quanly quanly = new f_quanly();
+            f_quanly quanly = new f_quanly(this.conn);
             quanly.setVisible(true);
             this.setVisible(false);
         } else if ("Nhân viên".equals(quyen)) {
-            f_nhanvien nhanvien = new f_nhanvien();
+            f_nhanvien nhanvien = new f_nhanvien(this.conn);
             nhanvien.setVisible(true);
             this.setVisible(false);
         } else {
