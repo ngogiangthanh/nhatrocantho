@@ -1,10 +1,18 @@
 package GUIs;
 
+import configs.Config;
+import controllers.ChuNhaTroController;
+
 import javax.swing.JOptionPane;
 
 public class f_nhanvien extends javax.swing.JFrame {
 
-    public f_nhanvien() {
+    private final Config conn;
+    private ChuNhaTroController chus;
+
+    public f_nhanvien(Config conn) {
+        this.conn = conn;
+        this.chus = new ChuNhaTroController(this.conn);
         initComponents();
     }
 
@@ -40,6 +48,14 @@ public class f_nhanvien extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 768));
         setMinimumSize(new java.awt.Dimension(1024, 768));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         btnthemchunhatro.setText("Thêm");
 
@@ -51,7 +67,7 @@ public class f_nhanvien extends javax.swing.JFrame {
 
         tbchunhatro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "STT", "CMND", "Tên chủ nhà trọ", "Địa chỉ"
@@ -251,11 +267,11 @@ public class f_nhanvien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemthongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemthongtinActionPerformed
-        JOptionPane.showMessageDialog(this, "Nhóm phát triển Chuột.\nPhiên bản 0.1.","Thông tin phần mềm",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Nhóm phát triển Chuột.\nPhiên bản 0.1.", "Thông tin phần mềm", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_itemthongtinActionPerformed
 
     private void itemdangxuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemdangxuatActionPerformed
-        f_dangnhap dangnhap = f_dangnhap.getInstance();
+        f_dangnhap dangnhap = f_dangnhap.getInstance(this.conn);
         dangnhap.createAndShowUI();
         this.dispose();
     }//GEN-LAST:event_itemdangxuatActionPerformed
@@ -263,6 +279,15 @@ public class f_nhanvien extends javax.swing.JFrame {
     private void itemthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemthoatActionPerformed
         this.dispose();
     }//GEN-LAST:event_itemthoatActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+        chus.show(tbchunhatro);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       this.conn.closeConn();
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnrefreshchunhatro;
