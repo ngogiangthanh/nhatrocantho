@@ -1,28 +1,25 @@
 package models;
 
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.query.Query;
 import java.util.*;
 
 public class NhanVien extends Nguoi {
 
     private String MSNV;
 
-    private TaiKhoan nguoidung;
+    private Set<TaiKhoan> nguoidung;
 
     private Set<HopDong> dshopdong;
 
     public NhanVien() {
     }
 
-    public NhanVien(String MSNV, TaiKhoan nguoidung, Set<HopDong> dshopdong) {
+    public NhanVien(String MSNV, Set<TaiKhoan> nguoidung, Set<HopDong> dshopdong) {
         this.MSNV = MSNV;
         this.nguoidung = nguoidung;
         this.dshopdong = dshopdong;
     }
     
-     public NhanVien(TaiKhoan nguoidung) {
+     public NhanVien( Set<TaiKhoan> nguoidung) {
         this.nguoidung = nguoidung;
     }
 
@@ -39,7 +36,7 @@ public class NhanVien extends Nguoi {
         return this.MSNV;
     }
 
-    public TaiKhoan getNguoidung() {
+    public Set<TaiKhoan> getNguoidung() {
         return this.nguoidung;
     }
 
@@ -78,7 +75,7 @@ public class NhanVien extends Nguoi {
         this.MSNV = MSNV;
     }
 
-    public void setNguoidung(TaiKhoan nguoidung) {
+    public void setNguoidung(Set<TaiKhoan> nguoidung) {
         this.nguoidung = nguoidung;
     }
 
@@ -115,17 +112,8 @@ public class NhanVien extends Nguoi {
     protected void setIsDel(boolean isDel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-
+   
     byte getQuyen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-  // ham lay tai khoang
-    public TaiKhoan getTaiKhoan(){
-        return this.nguoidung;
-    }
-   //ham lay gioi tinh
-    public GioiTinh getGioiTinh(){
-        return this.gioitinh;
     }
 }
