@@ -33,9 +33,11 @@ public class NguoiThueController {
         }
     }
 
-    public void add() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        NguoiThue nguoithue = new NguoiThue("381647292", "Ngô Giang Thanh", GioiTinh.Nam, "0946344233", sdf.parse("25-08-1992"));
+    public void add(String CMND, String hoten, GioiTinh gioitinh, String sdt, Date ngaysinh,String congviec) throws ParseException {
+        SimpleDateFormat formater = new SimpleDateFormat("dd-M-yyyy");
+        String format = formater.format(ngaysinh);
+        NguoiThue nguoithue = new NguoiThue(CMND, hoten, gioitinh, sdt, formater.parse(format));
+        nguoithue.setCongviec(congviec);
         this.db.store(nguoithue);
     }
 
