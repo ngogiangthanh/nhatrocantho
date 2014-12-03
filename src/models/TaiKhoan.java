@@ -1,15 +1,9 @@
 package models;
 
-import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.query.Predicate;
-import com.db4o.query.Query;
-
 public class TaiKhoan {
 
     private String taikhoan;
     private String matkhau;
-    //cai nay nhan de nghi sua lai la kieu enum nhe
     private byte quyen;
 
     public TaiKhoan() {
