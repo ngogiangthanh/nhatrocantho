@@ -116,30 +116,6 @@ public class NhanVien extends Nguoi {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-//ham tim kim tat ca nhan vien
-    public List<NhanVien> GetAll(){
-        try {
-           // NhanVien t = new NhanVien(null);
-        KetNoi cn = new KetNoi();
-        Query query = cn.GetDb().query();
-        query.constrain(NhanVien.class);
-        List<NhanVien> All_nhanvien = query.execute();
-        System.out.print(All_nhanvien.size());
-        /* if(!All_nhanvien.isEmpty()){
-            System.out.println("da vao");
-            for(NhanVien nv : All_nhanvien){
-                System.out.print(nv.MSNV);
-            }
-        }*/
-        cn.CloseDb();
-        return  All_nhanvien;    
-        } catch (Exception e) {
-            System.out.print("loi");
-            return null;
-        }
-        
-          
-    }
 
     byte getQuyen() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
