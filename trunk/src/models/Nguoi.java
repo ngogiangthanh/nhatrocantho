@@ -14,8 +14,16 @@ public abstract class Nguoi {
     
     protected Date ngaysinh;
     
-    protected boolean isDel;
+    protected boolean isDel = false;
 
+    public Nguoi(String CMND, String hoten, GioiTinh gioitinh, String sdt, Date ngaysinh) {
+        this.CMND = CMND;
+        this.hoten = hoten;
+        this.gioitinh = gioitinh;
+        this.sdt = sdt;
+        this.ngaysinh = ngaysinh;
+    }
+    
     abstract public boolean isIsDel();
 
     abstract protected String getCMND();

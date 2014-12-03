@@ -8,12 +8,8 @@ public class NguoiThue extends Nguoi {
 
     private String congviec;
 
-    public NguoiThue() {
-    }
-
-    public NguoiThue(Set<HopDong> dshopdong, String congviec) {
-        this.dshopdong = dshopdong;
-        this.congviec = congviec;
+    public NguoiThue(String CMND, String hoten, GioiTinh gioitinh, String sdt, Date ngaysinh) {
+        super(CMND, hoten, gioitinh, sdt, ngaysinh);
     }
 
     public String getCongviec() {

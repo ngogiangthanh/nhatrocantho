@@ -10,17 +10,8 @@ public class NhanVien extends Nguoi {
 
     private Set<HopDong> dshopdong;
 
-    public NhanVien() {
-    }
-
-    public NhanVien(String MSNV, Set<TaiKhoan> nguoidung, Set<HopDong> dshopdong) {
-        this.MSNV = MSNV;
-        this.nguoidung = nguoidung;
-        this.dshopdong = dshopdong;
-    }
-    
-     public NhanVien( Set<TaiKhoan> nguoidung) {
-        this.nguoidung = nguoidung;
+    public NhanVien(String CMND, String hoten, GioiTinh gioitinh, String sdt, Date ngaysinh) {
+        super(CMND, hoten, gioitinh, sdt, ngaysinh);
     }
 
     public Set<HopDong> getDshopdong() {
@@ -31,7 +22,7 @@ public class NhanVien extends Nguoi {
     public boolean isIsDel() {
         return isDel;
     }
-    
+
     public String getMSNV() {
         return this.MSNV;
     }
@@ -40,7 +31,6 @@ public class NhanVien extends Nguoi {
         return this.nguoidung;
     }
 
-
     @Override
     public String getCMND() {
         return this.CMND;
@@ -48,7 +38,7 @@ public class NhanVien extends Nguoi {
 
     @Override
     public String getHoten() {
-       return this.hoten;
+        return this.hoten;
     }
 
     @Override
@@ -68,7 +58,7 @@ public class NhanVien extends Nguoi {
 
     @Override
     public boolean getIsDel() {
-       return this.isDel;
+        return this.isDel;
     }
 
     public void setMSNV(String MSNV) {
@@ -85,35 +75,31 @@ public class NhanVien extends Nguoi {
 
     @Override
     public void setCMND(String CMND) {
-        this.CMND=CMND;
+        this.CMND = CMND;
     }
 
     @Override
     public void setHoten(String hoten) {
-        this.hoten=hoten;
+        this.hoten = hoten;
     }
 
     @Override
     public void setNgaysinh(Date ngaysinh) {
-        this.ngaysinh=ngaysinh;
+        this.ngaysinh = ngaysinh;
     }
 
     @Override
     public void setGioitinh(GioiTinh gioitinh) {
-       this.gioitinh=gioitinh;
+        this.gioitinh = gioitinh;
     }
 
     @Override
     public void setSdt(String sdt) {
-        this.sdt=sdt;
+        this.sdt = sdt;
     }
 
     @Override
     public void setIsDel(boolean isDel) {
-        this.isDel=isDel;
-    }
-   
-    byte getQuyen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.isDel = isDel;
     }
 }

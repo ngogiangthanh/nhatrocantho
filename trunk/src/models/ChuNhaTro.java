@@ -8,20 +8,10 @@ public class ChuNhaTro extends Nguoi {
 
     private Set<NhaTro> dsnhatro;
 
-    public ChuNhaTro() {
+    public ChuNhaTro(String CMND, String hoten, GioiTinh gioitinh, String sdt, Date ngaysinh) {
+        super(CMND, hoten, gioitinh, sdt, ngaysinh);
     }
-
-    public ChuNhaTro(DiaChi diachi, Set<NhaTro> dsnhatro) {
-        this.diachi = diachi;
-        this.dsnhatro = dsnhatro;
-    }
-
-    public ChuNhaTro(String CMND, String hoten, DiaChi diachi) {
-        this.CMND = CMND;
-        this.hoten = hoten;
-        this.diachi = diachi;
-    }
-
+    
     @Override
     public boolean isIsDel() {
         return isDel;

@@ -41,9 +41,9 @@ public class ChuNhaTroController {
     }
 
     public void add() {
-        DiaChi dc = new DiaChi("195/1B", "hẻm 195", "đường 3/2", "quận Ninh Kiều", "TP Cần Thơ");
-        ChuNhaTro chus = new ChuNhaTro("CMND", "Phan Lâm Mỹ Ngà", dc);
-        this.db.store(chus);
+     //   DiaChi dc = new DiaChi("195/1B", "hẻm 195", "đường 3/2", "quận Ninh Kiều", "TP Cần Thơ");
+      //  ChuNhaTro chus = new ChuNhaTro("CMND", "Phan Lâm Mỹ Ngà", dc);
+       // this.db.store(chus);
     }
 
     public void close() {
