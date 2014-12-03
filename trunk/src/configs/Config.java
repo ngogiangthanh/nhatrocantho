@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.config.EmbeddedConfiguration;
 
 public class Config {
 	
@@ -11,10 +12,15 @@ public class Config {
 	
 	public Config() {
 		try{
+                    EmbeddedConfiguration config = Db4oEmbedded.newConfiguration(); 
+               //     config.common().objectClass(Publication.class).cascadeOnUpdate(true); 
+                //    config.common().objectClass(Publication.class).cascadeOnDelete(true); 
+                    config.common().optimizeNativeQueries(false);
 			//Khoi tao
 			File currentDirFile = new File(".");
 			String currentPathProject = currentDirFile.getAbsolutePath();
-			this.db = Db4oEmbedded.openFile(currentPathProject.substring(0,currentPathProject.length()-1)+"src/database/containers.dbo");
+			this.db = Db4oEmbedded.openFile(config,currentPathProject.substring(0,currentPathProject.length()-1)+"src/database/containers.dbo");
+                      
 			System.out.println("Open connect to db4o successsfully!");
 		}
 		catch(Exception ex)

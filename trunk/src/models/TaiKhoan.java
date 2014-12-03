@@ -49,20 +49,4 @@ public class TaiKhoan {
     public void setQuyen(byte quyen) {
         this.quyen = quyen;
     }
-//ham kiem tra nhan vien neu la nhanvien se tra ve quyen, ko thi tra ve -128;
-   //su dung Native Query
-    public byte Check_TaiKhoan(String user, String pass){
-        byte rs=-128;
-        KetNoi cn = new KetNoi();
-        ObjectContainer db = cn.GetDb();
-        //TaiKhoan tk = new TaiKhoan(user, pass, permission);
-        Query query = db.query();
-        query.constrain(TaiKhoan.class);
-        query.descend("taikhoan").constrain(user).equal();
-        ObjectSet<TaiKhoan> tks = query.execute();
-        if(!tks.isEmpty())
-            rs=tks.get(0).getQuyen();
-        cn.CloseDb();
-        return rs;
-    }
 }
