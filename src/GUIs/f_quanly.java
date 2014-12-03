@@ -53,6 +53,11 @@ public class f_quanly extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1024, 768));
         setMinimumSize(new java.awt.Dimension(1024, 768));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnthem.setText("Thêm");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
@@ -251,6 +256,7 @@ public class f_quanly extends javax.swing.JFrame {
     }//GEN-LAST:event_itemdangxuatActionPerformed
 
     private void itemthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemthoatActionPerformed
+        this.conn.closeConn();
         this.dispose();
     }//GEN-LAST:event_itemthoatActionPerformed
 
@@ -271,6 +277,10 @@ public class f_quanly extends javax.swing.JFrame {
     private void btnrefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefreshActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnrefreshActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        this.conn.closeConn();
+    }//GEN-LAST:event_formWindowClosing
 
     private void search() {
         JOptionPane.showMessageDialog(this, "Gọi hàm tìm kiếm.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
