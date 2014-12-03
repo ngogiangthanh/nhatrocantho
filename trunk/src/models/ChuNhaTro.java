@@ -5,7 +5,7 @@ import java.util.*;
 public class ChuNhaTro extends Nguoi {
 
     private DiaChi diachi;
-    
+
     private Set<NhaTro> dsnhatro;
 
     public ChuNhaTro() {
@@ -15,11 +15,13 @@ public class ChuNhaTro extends Nguoi {
         this.diachi = diachi;
         this.dsnhatro = dsnhatro;
     }
-    public ChuNhaTro(String CMND,String hoten,DiaChi diachi) {
+
+    public ChuNhaTro(String CMND, String hoten, DiaChi diachi) {
         this.CMND = CMND;
         this.hoten = hoten;
         this.diachi = diachi;
-            }
+    }
+
     @Override
     public boolean isIsDel() {
         return isDel;
@@ -63,7 +65,7 @@ public class ChuNhaTro extends Nguoi {
 
     @Override
     public String getSdt() {
-       return this.sdt;
+        return this.sdt;
     }
 
     @Override
@@ -73,32 +75,32 @@ public class ChuNhaTro extends Nguoi {
 
     @Override
     public void setCMND(String CMND) {
-       this.CMND=CMND;
+        this.CMND = CMND;
     }
 
     @Override
     public void setHoten(String hoten) {
-        this.hoten=hoten;
+        this.hoten = hoten;
     }
 
     @Override
     public void setNgaysinh(Date ngaysinh) {
-        this.ngaysinh=ngaysinh;
+        this.ngaysinh = ngaysinh;
     }
 
     @Override
     public void setGioitinh(GioiTinh gioitinh) {
-        this.gioitinh=gioitinh;
+        this.gioitinh = gioitinh;
     }
 
     @Override
     public void setSdt(String sdt) {
-        this.sdt=sdt;
+        this.sdt = sdt;
     }
 
     @Override
     public void setIsDel(boolean isDel) {
-        this.isDel=isDel;
+        this.isDel = isDel;
     }
 
 }
