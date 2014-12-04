@@ -3,8 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package GUIs;
+
+import com.db4o.ObjectSet;
+import controllers.ChuNhaTroController;
+import java.awt.HeadlessException;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.DiaChi;
+import models.NhaTro;
+import sun.security.jca.GetInstance;
 
 /**
  *
@@ -12,11 +24,27 @@ package GUIs;
  */
 public class f_chunhatro_them extends javax.swing.JFrame {
 
-    /**
-     * Creates new form f_chunhatro_them
-     */
-    public f_chunhatro_them() {
+    private static f_chunhatro_them _instance;
+    private ChuNhaTroController chus;
+
+    public f_chunhatro_them(ChuNhaTroController chus) {
         initComponents();
+        this.chus = chus;
+    }
+
+    public static f_chunhatro_them getInstance(ChuNhaTroController chus) {
+        if (_instance == null) {
+            _instance = new f_chunhatro_them(chus);
+        }
+        return _instance;
+    }
+
+    private f_chunhatro_them() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void createAndShowUI() {
+        setVisible(true);
     }
 
     /**
@@ -33,18 +61,55 @@ public class f_chunhatro_them extends javax.swing.JFrame {
         lbngaysinh = new javax.swing.JLabel();
         lbgioitinh = new javax.swing.JLabel();
         lbsdt = new javax.swing.JLabel();
-        lbdiachi = new javax.swing.JLabel();
+        lbsonha = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbdsnhatro = new javax.swing.JTable();
         tfcmnd = new javax.swing.JTextField();
         tfhoten = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        tfsdt = new javax.swing.JTextField();
+        btnthemchunhatro = new javax.swing.JButton();
+        btnthemnhatro = new javax.swing.JButton();
+        btnthoat = new javax.swing.JButton();
+        datengaysinh = new org.jdesktop.swingx.JXDatePicker();
+        cbgioitinh = new javax.swing.JComboBox();
+        lbhem = new javax.swing.JLabel();
+        lbduong = new javax.swing.JLabel();
+        lbquanhuyen = new javax.swing.JLabel();
+        lbtinhtp = new javax.swing.JLabel();
+        tfsonha = new javax.swing.JTextField();
+        tfhem = new javax.swing.JTextField();
+        tfduong = new javax.swing.JTextField();
+        tfquanhuyen = new javax.swing.JTextField();
+        tftinhtp = new javax.swing.JTextField();
+        lbtennhatro = new javax.swing.JLabel();
+        lbmotanhatro = new javax.swing.JLabel();
+        lbsdtnhatro = new javax.swing.JLabel();
+        lbsonhanhatro = new javax.swing.JLabel();
+        lbgpkd = new javax.swing.JLabel();
+        lbhemnhatro = new javax.swing.JLabel();
+        lbduongnhatro = new javax.swing.JLabel();
+        lbquanhuyennhatro = new javax.swing.JLabel();
+        lbtinhtpnhatro = new javax.swing.JLabel();
+        tfgpkd = new javax.swing.JTextField();
+        tftennhatro = new javax.swing.JTextField();
+        tfmotanhatro = new javax.swing.JTextField();
+        tfsdtnhatro = new javax.swing.JTextField();
+        tfhemnhatro = new javax.swing.JTextField();
+        tfduongnhatro = new javax.swing.JTextField();
+        tfquanhuyennhatro = new javax.swing.JTextField();
+        tftinhtpnhatro = new javax.swing.JTextField();
+        lbcnt = new javax.swing.JLabel();
+        lbnhatro = new javax.swing.JLabel();
+        tfsonhanhatro = new javax.swing.JTextField();
+        btnsuachunhatro = new javax.swing.JButton();
+        btnxoachunhatro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lbcmnd.setText("CMND:");
 
@@ -56,105 +121,613 @@ public class f_chunhatro_them extends javax.swing.JFrame {
 
         lbsdt.setText("Số điện thoại:");
 
-        lbdiachi.setText("Địa chỉ:");
+        lbsonha.setText("Số nhà:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbdsnhatro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "STT", "GPKD", "Tên nhà trọ", "Mô tả nhà trọ", "Số điện thoại", "Địa chỉ"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
-        jTextField5.setText("jTextField5");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbdsnhatro);
 
-        jTextField6.setText("jTextField6");
+        btnthemchunhatro.setText("Thêm chủ nhà trọ");
+        btnthemchunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthemchunhatroActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        btnthemnhatro.setText("Thêm nhà trọ");
+        btnthemnhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthemnhatroActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        btnthoat.setText("Thoát");
+        btnthoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthoatActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("jButton3");
+        cbgioitinh.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nam", "Nữ" }));
+        cbgioitinh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbgioitinhActionPerformed(evt);
+            }
+        });
+
+        lbhem.setText("Hẻm:");
+
+        lbduong.setText("Đường:");
+
+        lbquanhuyen.setText("Quận/Huyện:");
+
+        lbtinhtp.setText("Tỉnh/TP:");
+
+        tftinhtp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftinhtpActionPerformed(evt);
+            }
+        });
+
+        lbtennhatro.setText("Tên nhà trọ:");
+
+        lbmotanhatro.setText("Mô tả nhà trọ:");
+
+        lbsdtnhatro.setText("Số điện thoại:");
+
+        lbsonhanhatro.setText("Số nhà:");
+
+        lbgpkd.setText("GPKD:");
+
+        lbhemnhatro.setText("Hẻm:");
+
+        lbduongnhatro.setText("Đường:");
+
+        lbquanhuyennhatro.setText("Quận/Huyện:");
+
+        lbtinhtpnhatro.setText("Tình/TP:");
+
+        tfgpkd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfgpkdActionPerformed(evt);
+            }
+        });
+
+        tftennhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tftennhatroActionPerformed(evt);
+            }
+        });
+
+        lbcnt.setText("Chủ nhà trọ");
+
+        lbnhatro.setText("Nhà trọ");
+
+        btnsuachunhatro.setText("Sửa nhà trọ");
+        btnsuachunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsuachunhatroActionPerformed(evt);
+            }
+        });
+
+        btnxoachunhatro.setText("Xóa nhà trọ");
+        btnxoachunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoachunhatroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(154, 154, 154)
+                .addComponent(lbcnt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbnhatro)
+                .addGap(101, 101, 101))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbcmnd)
+                    .addComponent(lbgioitinh)
+                    .addComponent(lbchunhatro)
+                    .addComponent(lbngaysinh)
+                    .addComponent(lbsonha)
+                    .addComponent(lbhem)
+                    .addComponent(lbduong)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(lbngaysinh, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(lbdiachi)
-                                            .addGap(37, 37, 37)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(lbsdt)
-                                            .addGap(7, 7, 7)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(lbgioitinh)
-                                        .addComponent(lbchunhatro))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lbcmnd)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfcmnd, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(lbtinhtp)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lbsdt)
+                                .addComponent(lbquanhuyen)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton2)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton3)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfquanhuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfcmnd, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(86, 86, 86)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbgpkd)
+                                .addComponent(lbtennhatro)
+                                .addComponent(lbmotanhatro))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbsonhanhatro)
+                                .addComponent(lbsdtnhatro)
+                                .addComponent(lbhemnhatro)
+                                .addComponent(lbduongnhatro)
+                                .addComponent(lbquanhuyennhatro)
+                                .addComponent(lbtinhtpnhatro)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfsonhanhatro)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfsdtnhatro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tftennhatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfquanhuyennhatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tftinhtpnhatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfgpkd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tftinhtp, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tfmotanhatro, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(datengaysinh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbgioitinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfsdt)
+                            .addComponent(tfsonha)
+                            .addComponent(tfhem)
+                            .addComponent(tfduong, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfhemnhatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfduongnhatro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnthemchunhatro)
+                .addGap(31, 31, 31)
+                .addComponent(btnthemnhatro)
+                .addGap(29, 29, 29)
+                .addComponent(btnsuachunhatro)
+                .addGap(31, 31, 31)
+                .addComponent(btnxoachunhatro)
+                .addGap(18, 18, 18)
+                .addComponent(btnthoat)
+                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbcmnd)
-                    .addComponent(tfcmnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbcnt)
+                    .addComponent(lbnhatro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbchunhatro)
-                    .addComponent(tfhoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbngaysinh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lbgioitinh)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbsdt)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbdiachi)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbtennhatro)
+                    .addComponent(tftennhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbcmnd)
+                    .addComponent(tfcmnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbgpkd)
+                    .addComponent(tfgpkd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbmotanhatro)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfmotanhatro, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(datengaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbngaysinh))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbgioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbgioitinh))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfsdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbsdt)
+                            .addComponent(tfsdtnhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbsdtnhatro))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfsonhanhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbsonhanhatro))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfhemnhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbhemnhatro)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfsonha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbsonha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfhem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbhem))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfduong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbduong))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfquanhuyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbquanhuyen))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbtinhtp)
+                            .addComponent(tftinhtp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfduongnhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbduongnhatro))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbquanhuyennhatro)
+                            .addComponent(tfquanhuyennhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbtinhtpnhatro)
+                            .addComponent(tftinhtpnhatro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(btnthemnhatro)
+                    .addComponent(btnthoat)
+                    .addComponent(btnsuachunhatro)
+                    .addComponent(btnxoachunhatro)
+                    .addComponent(btnthemchunhatro))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbgioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbgioitinhActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbgioitinhActionPerformed
+
+    private void tftinhtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftinhtpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftinhtpActionPerformed
+
+    private void tftennhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tftennhatroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tftennhatroActionPerformed
+
+    private void tfgpkdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfgpkdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfgpkdActionPerformed
+
+    private void btnthemchunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemchunhatroActionPerformed
+        String txthoten = tfhoten.getText();
+        String txtcmnd = tfcmnd.getText();
+        String txtsdt = tfsdt.getText();
+        String txtsonha = tfsonha.getText();
+        String txthem = tfhem.getText();
+        String txtduong = tfduong.getText();
+        String txtquanhuyen = tfquanhuyen.getText();
+        String txttinhtp = tftinhtp.getText();
+        if (txthoten.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập họ tên");
+            tfhoten.requestFocus();
+        } else if (txtcmnd.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập CMND");
+            tfcmnd.requestFocus();
+        } else if (txtsdt.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại");
+            tfsdt.requestFocus();
+        } else if (txtsonha.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nhà");
+            tfsonha.requestFocus();
+        } else if (txthem.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập hẻm");
+            tfhem.requestFocus();
+        } else if (txtduong.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đường");
+            tfduong.requestFocus();
+        } else if (txtquanhuyen.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập quận huyện");
+            tfquanhuyen.requestFocus();
+        } else if (txttinhtp.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tỉnh/TP");
+            tftinhtp.requestFocus();
+        } else {
+            int nRow = tbdsnhatro.getRowCount();
+            int nCol = tbdsnhatro.getColumnCount();
+            if (nRow >= 1) {
+                Object[][] tbdata = new Object[nRow][nCol];
+                for (int i = 0; i < nRow; i++) {
+                    for (int j = 0; j < nCol; j++) {
+                        tbdata[i][j] = tbdsnhatro.getValueAt(i, j);
+                    }
+                }
+                try {
+                    DiaChi diachi = new DiaChi(tfsonha.getText(), tfhem.getText(), tfduong.getText(), tfquanhuyen.getText(), tftinhtp.getText());
+                    this.chus.add(txthoten, txtcmnd, diachi, tbdata);
+                    int result = JOptionPane.showConfirmDialog(this, "Thêm chủ nhà trọ thành công! \nBạn có muốn tiếp tục thêm?\nNhấn yes để tiếp tục, no để thoát!", "Warning", JOptionPane.YES_NO_OPTION);
+                    this.clearForm();
+                    if (result == JOptionPane.NO_OPTION) {
+                        this.dispose();
+                    }
+                } catch (ParseException ex) {
+                    Logger.getLogger(f_chunhatro_them.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập ít nhất một nhà trọ");
+                tftennhatro.requestFocus();
+            }
+
+    }//GEN-LAST:event_btnthemchunhatroActionPerformed
+    }
+    private void btnthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthoatActionPerformed
+        this.clearForm();
+        this.dispose();
+    }//GEN-LAST:event_btnthoatActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+//        tbdsnhatro.addMouseListener(new java.awt.event.MouseAdapter() {
+//            @Override
+//            public void mouseClicked(java.awt.event.MouseEvent evt) {
+//                int row = tbdsnhatro.rowAtPoint(evt.getPoint());
+//                if (row >= 0) {
+//                    tftennhatro.setText(tbdsnhatro.getValueAt(row, 1).toString());
+//                    tfgpkd.setText(tbdsnhatro.getValueAt(row, 2).toString());
+//                    tfmotanhatro.setText(tbdsnhatro.getValueAt(row, 3).toString());
+//                    tfsdtnhatro.setText(tbdsnhatro.getValueAt(row, 4).toString());
+//                    tfsonhanhatro.setText(tbdsnhatro.getValueAt(row, 5).toString());
+//                    tfhemnhatro.setText(tbdsnhatro.getValueAt(row, 6).toString());
+//                    tfduongnhatro.setText(tbdsnhatro.getValueAt(row, 7).toString());
+//                    tfquanhuyennhatro.setText(tbdsnhatro.getValueAt(row, 8).toString());
+//                    tftinhtpnhatro.setText(tbdsnhatro.getValueAt(row, 9).toString());
+//                }
+//            }
+//        });
+        chus.shownhatro(tbdsnhatro);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnthemnhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemnhatroActionPerformed
+        String txttennhatro = tftennhatro.getText();
+        String txtgpkd = tfgpkd.getText();
+        String txtmotanhatro = tfmotanhatro.getText();
+        String txtsdtnhatro = tfsdtnhatro.getText();
+        String txtsonhanhatro = tfsonhanhatro.getText();
+        String txthemnhatro = tfhemnhatro.getText();
+        String txtduongnhatro = tfduongnhatro.getText();
+        String txtquanhuyennhatro = tfquanhuyennhatro.getText();
+        String txttinhtpnhatro = tftinhtpnhatro.getText();
+        if (txttennhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhà trọ");
+            tftennhatro.requestFocus();
+        } else if (txtgpkd.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập GPKD");
+            tfgpkd.requestFocus();
+        } else if (txtmotanhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mô tả nhà trọ");
+            tfmotanhatro.requestFocus();
+        } else if (txtsdtnhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại của nhà trọ");
+            tfsdtnhatro.requestFocus();
+        } else if (txtsonhanhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nhà nhà trọ");
+            tfsonhanhatro.requestFocus();
+        } else if (txthemnhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên hẻm của nhà trọ");
+            tfhemnhatro.requestFocus();
+        } else if (txtduongnhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên đường của nhà trọ");
+            tfduongnhatro.requestFocus();
+        } else if (txtquanhuyennhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên quận/huyện của nhà trọ");
+            tfquanhuyennhatro.requestFocus();
+        } else if (txttinhtpnhatro.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tỉnh/TP của nhà trọ");
+            tftinhtpnhatro.requestFocus();
+        } else {
+//            int stt = tbdsnhatro.getRowCount();
+//            for (int i = 0; i < stt; i++) {
+//                if (tbdsnhatro.getValueAt(i, 1).equals(txttennhatro)) {
+//                    tbdsnhatro.setValueAt(txttennhatro, i, 1);
+//                    tbdsnhatro.setValueAt(txtgpkd, i, 2);
+//                    tbdsnhatro.setValueAt(txtmotanhatro, i, 3);
+//                    tbdsnhatro.setValueAt(txtsdtnhatro, i, 4);
+//                    tbdsnhatro.setValueAt(txtsonhanhatro, i, 5);
+//                    tbdsnhatro.setValueAt(txthemnhatro, i, 6);
+//                    tbdsnhatro.setValueAt(txtduongnhatro, i, 7);
+//                    tbdsnhatro.setValueAt(txtquanhuyennhatro, i, 8);
+//                    tbdsnhatro.setValueAt(txttinhtpnhatro, i, 9);
+//                    tftennhatro.requestFocus();
+//                    tfgpkd.setText(null);
+//                    tfmotanhatro.setText(null);
+//                    tfsdtnhatro.setText(null);
+//                    tfsonhanhatro.setText(null);
+//                    tfhemnhatro.setText(null);
+//                    tfduongnhatro.setText(null);
+//                    tfquanhuyennhatro.setText(null);
+//                    tftinhtpnhatro.setText(null);
+//                    return;
+
+            try {
+                int stt = tbdsnhatro.getRowCount();
+                int sdt = Integer.parseInt(txtsdtnhatro);
+                DiaChi diachi = new DiaChi(tfsonhanhatro.getText(), tfhemnhatro.getText(), tfduongnhatro.getText(), tfquanhuyennhatro.getText(), tftinhtpnhatro.getText());
+                DefaultTableModel model = (DefaultTableModel) tbdsnhatro.getModel();
+                Object[] row = {++stt, txttennhatro, txtgpkd, txtmotanhatro, txtsdtnhatro, diachi};//txtsonhanhatro, txthemnhatro, txtduongnhatro, txtquanhuyennhatro, txttinhtpnhatro};
+                model.addRow(row);
+                tftennhatro.setText(null);
+                tftennhatro.requestFocus();
+                tfgpkd.setText(null);
+                tfmotanhatro.setText(null);
+                tfsdtnhatro.setText(null);
+                tfsonhanhatro.setText(null);
+                tfhemnhatro.setText(null);
+                tfduongnhatro.setText(null);
+                tfquanhuyennhatro.setText(null);
+                tftinhtpnhatro.setText(null);
+            } catch (NumberFormatException | HeadlessException ex) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại không hợp lệ");
+                tfsdtnhatro.requestFocus();
+
+            }
+        }
+    }//GEN-LAST:event_btnthemnhatroActionPerformed
+
+    private void btnsuachunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuachunhatroActionPerformed
+        int numRow = tbdsnhatro.getSelectedRow();
+        if (numRow != -1) {
+            String txttennhatro = tftennhatro.getText();
+            String txtgpkd = tfgpkd.getText();
+            String txtmotanhatro = tfmotanhatro.getText();
+            String txtsdtnhatro = tfsdtnhatro.getText();
+            String txtsonhanhatro = tfsonhanhatro.getText();
+            String txthemnhatro = tfhemnhatro.getText();
+            String txtduongnhatro = tfduongnhatro.getText();
+            String txtquanhuyennhatro = tfquanhuyennhatro.getText();
+            String txttinhtpnhatro = tftinhtpnhatro.getText();
+            if (txttennhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhà trọ");
+                tftennhatro.requestFocus();
+            } else if (txtgpkd.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập GPKD");
+                tfgpkd.requestFocus();
+            } else if (txtmotanhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập mô tả nhà trọ");
+                tfmotanhatro.requestFocus();
+            } else if (txtsdtnhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại của nhà trọ");
+                tfsdtnhatro.requestFocus();
+            } else if (txtsonhanhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nhà nhà trọ");
+                tfsonhanhatro.requestFocus();
+            } else if (txthemnhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên hẻm của nhà trọ");
+                tfhemnhatro.requestFocus();
+            } else if (txtduongnhatro.isEmpty()) {
+                 JOptionPane.showMessageDialog(this, "Vui lòng nhập tên đường của nhà trọ");
+                tfduongnhatro.requestFocus();
+            } else if (txtquanhuyennhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên quận/huyện của nhà trọ");
+                 tfquanhuyennhatro.requestFocus();
+            } else if (txttinhtpnhatro.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tỉnh/TP của nhà trọ");
+                tftinhtpnhatro.requestFocus();
+            } else {
+                tbdsnhatro.setValueAt(txttennhatro, numRow, 1);
+                tbdsnhatro.setValueAt(txtgpkd, numRow, 2);
+                tbdsnhatro.setValueAt(txtmotanhatro, numRow, 3);
+                tbdsnhatro.setValueAt(txtsdtnhatro, numRow, 4);
+                tbdsnhatro.setValueAt(txtsonhanhatro, numRow, 5);
+                tbdsnhatro.setValueAt(txthemnhatro, numRow, 6);
+                tbdsnhatro.setValueAt(txtduongnhatro, numRow, 7);
+                tbdsnhatro.setValueAt(txtquanhuyennhatro, numRow, 8);
+                tbdsnhatro.setValueAt(txttinhtpnhatro, numRow, 9);
+            }
+        } else {
+            btnthemnhatroActionPerformed(null);
+        }
+    }//GEN-LAST:event_btnsuachunhatroActionPerformed
+
+    private void btnxoachunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoachunhatroActionPerformed
+        int numRow = tbdsnhatro.getSelectedRow();
+        if (numRow != -1) {
+            try {
+                DefaultTableModel model = (DefaultTableModel) tbdsnhatro.getModel();
+                model.removeRow(numRow);
+                model.fireTableDataChanged();
+                tftennhatro.setText(null);
+                tfgpkd.setText(null);
+                tfmotanhatro.setText(null);
+                tfsdtnhatro.setText(null);
+                tfsonhanhatro.setText(null);
+                tfhemnhatro.setText(null);
+                tfduongnhatro.setText(null);
+                tfquanhuyennhatro.setText(null);
+                tftinhtpnhatro.setText(null);
+             } catch (Exception ex) {
+
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn nhà trọ!");
+        }
+    }//GEN-LAST:event_btnxoachunhatroActionPerformed
+    private void clearForm() {
+        tfhoten.setText(null);
+        tfhoten.requestFocus();
+        tfcmnd.setText(null);
+        tfsdt.setText(null);
+        tfsonha.setText(null);
+        tfhem.setText(null);
+        tfduong.setText(null);
+        tfquanhuyen.setText(null);
+        tftinhtp.setText(null);
+        tbdsnhatro.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "STT", "Tên nhà trọ", "GPDK", "Mô tả nhà trọ", "Số điện thoại", "Địa chỉ"
+                }));
+//        ) {
+//            Class[] types = new Class[]{
+//                java.lang.Byte.class, java.lang.String.class, java.lang.String.class
+//            };
+//            boolean[] canEdit = new boolean[]{
+//                false, false, false
+//            };
+//
+//            @Override
+//            public Class getColumnClass(int columnIndex) {
+//                return types[columnIndex];
+//            }
+//
+//            @Override
+//            public boolean isCellEditable(int rowIndex, int columnIndex) {
+//                return canEdit[columnIndex];
+//            }
+//        });
+    }
 
     /**
      * @param args the command line arguments
@@ -192,20 +765,52 @@ public class f_chunhatro_them extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnsuachunhatro;
+    private javax.swing.JButton btnthemchunhatro;
+    private javax.swing.JButton btnthemnhatro;
+    private javax.swing.JButton btnthoat;
+    private javax.swing.JButton btnxoachunhatro;
+    private javax.swing.JComboBox cbgioitinh;
+    private org.jdesktop.swingx.JXDatePicker datengaysinh;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbchunhatro;
     private javax.swing.JLabel lbcmnd;
-    private javax.swing.JLabel lbdiachi;
+    private javax.swing.JLabel lbcnt;
+    private javax.swing.JLabel lbduong;
+    private javax.swing.JLabel lbduongnhatro;
     private javax.swing.JLabel lbgioitinh;
+    private javax.swing.JLabel lbgpkd;
+    private javax.swing.JLabel lbhem;
+    private javax.swing.JLabel lbhemnhatro;
+    private javax.swing.JLabel lbmotanhatro;
     private javax.swing.JLabel lbngaysinh;
+    private javax.swing.JLabel lbnhatro;
+    private javax.swing.JLabel lbquanhuyen;
+    private javax.swing.JLabel lbquanhuyennhatro;
     private javax.swing.JLabel lbsdt;
+    private javax.swing.JLabel lbsdtnhatro;
+    private javax.swing.JLabel lbsonha;
+    private javax.swing.JLabel lbsonhanhatro;
+    private javax.swing.JLabel lbtennhatro;
+    private javax.swing.JLabel lbtinhtp;
+    private javax.swing.JLabel lbtinhtpnhatro;
+    private javax.swing.JTable tbdsnhatro;
     private javax.swing.JTextField tfcmnd;
+    private javax.swing.JTextField tfduong;
+    private javax.swing.JTextField tfduongnhatro;
+    private javax.swing.JTextField tfgpkd;
+    private javax.swing.JTextField tfhem;
+    private javax.swing.JTextField tfhemnhatro;
     private javax.swing.JTextField tfhoten;
+    private javax.swing.JTextField tfmotanhatro;
+    private javax.swing.JTextField tfquanhuyen;
+    private javax.swing.JTextField tfquanhuyennhatro;
+    private javax.swing.JTextField tfsdt;
+    private javax.swing.JTextField tfsdtnhatro;
+    private javax.swing.JTextField tfsonha;
+    private javax.swing.JTextField tfsonhanhatro;
+    private javax.swing.JTextField tftennhatro;
+    private javax.swing.JTextField tftinhtp;
+    private javax.swing.JTextField tftinhtpnhatro;
     // End of variables declaration//GEN-END:variables
 }

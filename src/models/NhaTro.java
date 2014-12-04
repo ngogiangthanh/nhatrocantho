@@ -13,10 +13,11 @@ public class NhaTro {
     private Set<PhongTro> dsphongtro;
     private Set<ChiTietGia> dschitietgia;
     private boolean isDel;
-
     public NhaTro() {
     }
-
+     public NhaTro(String tenhatro) {
+        this.tennhatro = tenhatro;
+            }
     public NhaTro(String GPKD, String tennhatro, String motanhatro, String sdt, DiaChi diachi, ChuNhaTro chunhatro, Set<PhongTro> dsphongtro, Set<ChiTietGia> dschitietgia, boolean isDel) {
         this.GPKD = GPKD;
         this.tennhatro = tennhatro;
@@ -104,5 +105,5 @@ public class NhaTro {
     public void setIsDel(boolean isDel) {
         this.isDel = isDel;
     }
-
+    
 }
