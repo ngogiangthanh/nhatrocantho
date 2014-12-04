@@ -8,18 +8,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class f_nhanvien extends javax.swing.JFrame {
-
+    private static f_nhanvien _instance;
     private final Config conn;
     private final ChuNhaTroController chus;
     private final NguoiThueController nguoithue;
+    private String txttim;
 
     public f_nhanvien(Config conn) {
         this.conn = conn;
         this.chus = new ChuNhaTroController(this.conn);
         this.nguoithue = new NguoiThueController(this.conn);
         initComponents();
+    }
+    public static f_nhanvien getInstance(Config conn) {
+        if (_instance == null) {
+            _instance = new f_nhanvien(conn);
+        } else {
+            _instance.refresh(_instance.tbchunhatro, null);
+        }
+        return _instance;
     }
 
     @SuppressWarnings("unchecked")
@@ -64,10 +75,25 @@ public class f_nhanvien extends javax.swing.JFrame {
         });
 
         btnthemchunhatro.setText("Thêm");
+        btnthemchunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnthemchunhatroActionPerformed(evt);
+            }
+        });
 
         btnsuachunhatro.setText("Sửa");
+        btnsuachunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsuachunhatroActionPerformed(evt);
+            }
+        });
 
         btnxoaxoachunhatro.setText("Xóa");
+        btnxoaxoachunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnxoaxoachunhatroActionPerformed(evt);
+            }
+        });
 
         btntimchunhatro.setText("Tìm");
 
@@ -76,7 +102,7 @@ public class f_nhanvien extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "CMND", "Tên chủ nhà trọ", "Địa chỉ"
+                "STT", "Tên chủ nhà trọ", "CMND", "Địa chỉ"
             }
         ) {
             Class[] types = new Class [] {
@@ -96,14 +122,13 @@ public class f_nhanvien extends javax.swing.JFrame {
         });
         tbchunhatro.getTableHeader().setReorderingAllowed(false);
         sptbchunhatro.setViewportView(tbchunhatro);
-        if (tbchunhatro.getColumnModel().getColumnCount() > 0) {
-            tbchunhatro.getColumnModel().getColumn(0).setResizable(false);
-            tbchunhatro.getColumnModel().getColumn(1).setResizable(false);
-            tbchunhatro.getColumnModel().getColumn(2).setResizable(false);
-            tbchunhatro.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         btnrefreshchunhatro.setText("Làm mới");
+        btnrefreshchunhatro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnrefreshchunhatroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnchunhatroLayout = new javax.swing.GroupLayout(pnchunhatro);
         pnchunhatro.setLayout(pnchunhatroLayout);
@@ -120,9 +145,8 @@ public class f_nhanvien extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addComponent(btnxoaxoachunhatro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnrefreshchunhatro)
-                .addContainerGap(355, Short.MAX_VALUE))
-            .addComponent(sptbchunhatro)
+                .addComponent(btnrefreshchunhatro))
+            .addComponent(sptbchunhatro, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
         );
         pnchunhatroLayout.setVerticalGroup(
             pnchunhatroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,11 +165,6 @@ public class f_nhanvien extends javax.swing.JFrame {
         tpchinh.addTab("Chủ nhà trọ", pnchunhatro);
 
         btnthemnguoithue.setText("Thêm");
-        btnthemnguoithue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnthemnguoithueActionPerformed(evt);
-            }
-        });
 
         btnsuanguoithue.setText("Sửa");
 
@@ -155,7 +174,7 @@ public class f_nhanvien extends javax.swing.JFrame {
 
         tbnguoithue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null}
             },
             new String [] {
                 "STT", "CMND", "Họ tên", "Giới tính", "Công việc"
@@ -293,18 +312,69 @@ public class f_nhanvien extends javax.swing.JFrame {
     }//GEN-LAST:event_itemthoatActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        chus.show(tbchunhatro);
+
+        chus.show(tbchunhatro,txttim);
+
+        
+
         this.nguoithue.show(this.tbnguoithue);
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       this.conn.closeConn();
+        this.conn.closeConn();
     }//GEN-LAST:event_formWindowClosing
+
+
+    private void btnthemchunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemchunhatroActionPerformed
+        f_chunhatro_them add = f_chunhatro_them.getInstance(this.chus);
+        add.createAndShowUI();
+    }//GEN-LAST:event_btnthemchunhatroActionPerformed
+
+    private void btnrefreshchunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrefreshchunhatroActionPerformed
+         this.refresh(tbchunhatro,null);
+    }//GEN-LAST:event_btnrefreshchunhatroActionPerformed
+
+    private void btnxoaxoachunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaxoachunhatroActionPerformed
+         int row = tbchunhatro.getSelectedRow();
+         if(row != -1){
+             if(JOptionPane.showConfirmDialog(this,"Xác nhận xóa thông tin này","Xác nhận",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                 String txthoten = tbchunhatro.getValueAt(row,1).toString();
+                 chus.delete(txthoten);
+                 this.refresh(tbchunhatro,null);
+             }
+         } else {
+                JOptionPane.showMessageDialog(this,"Bạn chưa chọn đối tượng để xóa");
+                btnxoaxoachunhatro.requestFocus();
+         }
+    }//GEN-LAST:event_btnxoaxoachunhatroActionPerformed
+
+    private void btnsuachunhatroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuachunhatroActionPerformed
+        int row = tbchunhatro.getSelectedRow();
+        if(row != -1){
+             
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn đối tượng để sửa!");
+            btnsuachunhatro.requestFocus();
+        }
+        
+    }//GEN-LAST:event_btnsuachunhatroActionPerformed
+    public void refresh(JTable table, String txttim){
+        clearTable(table);
+        chus.show(table,txttim);
+    }
+    private void clearTable(JTable tbchunhatro) {
+        tbchunhatro.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "STT", "Tên chủ nhà trọ", "CMND", "Địa chỉ"
+                }));
+    }
 
     private void btnthemnguoithueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemnguoithueActionPerformed
        f_nguoithue_them nguoithue = f_nguoithue_them.getInstance(this.conn);
        nguoithue.createAndShowUI();
     }//GEN-LAST:event_btnthemnguoithueActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnrefreshchunhatro;
