@@ -7,9 +7,6 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import configs.Config;
 import models.TaiKhoan;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 /**
  *
  * @author Dinh Nhan

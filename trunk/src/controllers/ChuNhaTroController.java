@@ -76,7 +76,7 @@ public class ChuNhaTroController {
 //        this.db.store(chus);
 //        ChuNhaTro chus = new ChuNhaTro(hoten, cmnd, diachi);
 //        this.db.store(chus);
-        ChuNhaTro chus = new ChuNhaTro(hoten, cmnd, diachi);
+       // ChuNhaTro chus = new ChuNhaTro(hoten, cmnd, diachi);
 //        int Rows = dsnhatro.length;
 //        for (int i = 0; i < Rows; i++) {
 //            NhaTro nhatro = new NhaTro(dsnhatro[i][1].toString());
@@ -106,8 +106,8 @@ public class ChuNhaTroController {
             this.db.store(chu);
     }
     public void delete(String hoten){
-        ChuNhaTro chudel = (ChuNhaTro) this.db.queryByExample(new ChuNhaTro(hoten)).next();
-        this.db.delete(chudel);
+//        ChuNhaTro chudel = (ChuNhaTro) this.db.queryByExample(new ChuNhaTro(hoten)).next();
+   //     this.db.delete(chudel);
              }
     public void close() {
         if (this.db.close()) {

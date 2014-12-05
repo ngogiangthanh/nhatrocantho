@@ -12,19 +12,19 @@ public class ChuNhaTro extends Nguoi {
         super(CMND, hoten, gioitinh, sdt, ngaysinh);
     }
     
-    public ChuNhaTro(String hoten){
-        this.hoten = hoten;
-        this.dsnhatro = new HashSet<NhaTro>();
-    }
-    public ChuNhaTro(DiaChi diachi, Set<NhaTro> dsnhatro) {
-        this.diachi = diachi;
-        this.dsnhatro = dsnhatro;
-    }
-    public ChuNhaTro(String hoten,String CMND,DiaChi diachi) {
-        this.CMND = CMND;
-        this.hoten = hoten;
-        this.diachi = diachi;
-            }
+//    public ChuNhaTro(String hoten){
+//        this.hoten = hoten;
+//        this.dsnhatro = new HashSet<NhaTro>();
+//    }
+//    public ChuNhaTro(DiaChi diachi, Set<NhaTro> dsnhatro) {
+//        this.diachi = diachi;
+//        this.dsnhatro = dsnhatro;
+//    }
+//    public ChuNhaTro(String hoten,String CMND,DiaChi diachi) {
+//        this.CMND = CMND;
+//        this.hoten = hoten;
+//        this.diachi = diachi;
+//            }
 
     @Override
     public boolean isIsDel() {
