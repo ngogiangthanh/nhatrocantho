@@ -315,8 +315,6 @@ public class f_nhanvien extends javax.swing.JFrame {
 
         chus.show(tbchunhatro,txttim);
 
-        
-
         this.nguoithue.show(this.tbnguoithue);
     }//GEN-LAST:event_formWindowOpened
 

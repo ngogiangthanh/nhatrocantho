@@ -1,25 +1,49 @@
 
 package GUIs;
 
+import configs.Config;
+import controllers.c_NhanVien;
+import models.GioiTinh;
+import models.NhanVien;
+
 public class f_nhanvien_sua extends javax.swing.JFrame {
 
     private static f_nhanvien_sua _instance; //Kiểm tra sự tồn tại của 2 instance trong cùng 1 form
-
+    private c_NhanVien cnv = new c_NhanVien();
+    private  Config conn;
     public f_nhanvien_sua() {
         initComponents();
     }
-    
-     public static f_nhanvien_sua getInstance() {
+    public c_NhanVien getc_NhanVien(){
+        return this.cnv;
+    }
+    public f_nhanvien_sua(Config conn, String MSNV) {
+        c_NhanVien cnv = new c_NhanVien();
+        this.conn = conn;
+        NhanVien nv =  cnv.getNhanVien(conn, MSNV);
+        initComponents();
+        tfcmnd.setText(nv.getCMND());
+        tfhoten.setText(nv.getHoten());
+        tfmk.setText(nv.getNguoidung().getMatkhau());
+        tfmsnv.setText(nv.getMSNV());
+        tfsdt.setText(nv.getSdt());
+        tftk.setText(nv.getNguoidung().getTaikhoan());
+        dpngaysinh.setDate(nv.getNgaysinh());
+        cbbgioitinh.addItem(nv.getGioitinh());
+    }
+     public static f_nhanvien_sua getInstance(Config conn, String MSNV) {
         if (_instance == null) {
-            _instance = new f_nhanvien_sua();
+            return _instance = new f_nhanvien_sua(conn,  MSNV);
         }
-        return _instance;
+        else return _instance;
     }
       
     public void createAndShowUI() {
         setVisible(true);
     }
+private void formWindowOpened(java.awt.event.WindowEvent evt) { 
 
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -210,11 +234,20 @@ public class f_nhanvien_sua extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnluuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnluuActionPerformed
-        // TODO add your handling code here:
+        NhanVien nv = new NhanVien(tfcmnd.getText(), tfhoten.getText(),
+                                    (GioiTinh) cbbgioitinh.getItemAt(0), 
+                                    tfsdt.getText(), dpngaysinh.getDate());
+        
+        this.getc_NhanVien().updateNhanVien(this.conn, nv);
     }//GEN-LAST:event_btnluuActionPerformed
 
     private void btnresetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnresetActionPerformed
-        // TODO add your handling code here:
+        tfcmnd.setText("");
+        tfhoten.setText("");
+        tfmk.setText("");
+        tfmsnv.setText("");
+        tfsdt.setText("");
+        tftk.setText("");
     }//GEN-LAST:event_btnresetActionPerformed
 
     private void btnthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthoatActionPerformed
