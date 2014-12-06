@@ -6,7 +6,7 @@ public class NhanVien extends Nguoi {
 
     private String MSNV;
 
-    private Set<TaiKhoan> nguoidung;
+    private TaiKhoan nguoidung;
 
     private Set<HopDong> dshopdong;
 
@@ -27,7 +27,7 @@ public class NhanVien extends Nguoi {
         return this.MSNV;
     }
 
-    public Set<TaiKhoan> getNguoidung() {
+    public TaiKhoan getNguoidung() {
         return this.nguoidung;
     }
 
@@ -65,7 +65,7 @@ public class NhanVien extends Nguoi {
         this.MSNV = MSNV;
     }
 
-    public void setNguoidung(Set<TaiKhoan> nguoidung) {
+    public void setNguoidung(TaiKhoan nguoidung) {
         this.nguoidung = nguoidung;
     }
 
