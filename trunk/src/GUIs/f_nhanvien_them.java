@@ -1,17 +1,20 @@
 
 package GUIs;
 
+import configs.Config;
+
 public class f_nhanvien_them extends javax.swing.JFrame {
 
     private static f_nhanvien_them _instance; //Kiểm tra sự tồn tại của 2 instance trong cùng 1 form
-
-    public f_nhanvien_them() {
+    private Config conn;
+    public f_nhanvien_them(Config conn) {
+        this.conn = conn;
         initComponents();
     }
     
-     public static f_nhanvien_them getInstance() {
+     public static f_nhanvien_them getInstance(Config conn) {
         if (_instance == null) {
-            _instance = new f_nhanvien_them();
+            _instance = new f_nhanvien_them(conn);
         }
         return _instance;
     }
