@@ -12,15 +12,19 @@ import models.TaiKhoan;
  * @author Dinh Nhan
  */
 public class c_DangNhap {
-    private Config conn  =  new Config();
+    private  Config conn ;
     public  Config getConfig(){
         return this.conn;
     }
-    public boolean Check(String user, String pass){
+    public void setConfig(Config conn){
+        this.conn = conn;
+    }
+    public boolean Check(String user, String pass, Config conn){
+        this.setConfig(conn);
         String md5 = c_MD5.encryptMD5(pass);
         boolean rs = false;
         byte    quyen;
-        Query query = this.conn.getConn().query();
+        Query query = this.getConfig().getConn().query();
         query.constrain(TaiKhoan.class);
         query.descend("taikhoan").constrain(user).equal();
         query.descend("matkhau").constrain(md5).equal();
@@ -30,6 +34,9 @@ public class c_DangNhap {
             rs      =   true;
             f_quanly quanly = new f_quanly(this.getConfig());
             quanly.setVisible(true);
+        }
+        else{
+            //this.getConfig().closeConn();
         }
         return rs;
     }
