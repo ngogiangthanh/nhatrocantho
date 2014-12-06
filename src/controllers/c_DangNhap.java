@@ -2,6 +2,7 @@
  
 package controllers;
 
+import GUIs.f_nhanvien;
 import GUIs.f_quanly;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
@@ -32,8 +33,14 @@ public class c_DangNhap {
         if(!tks.isEmpty()){
             quyen   =   tks.get(0).getQuyen();
             rs      =   true;
-            f_quanly quanly = new f_quanly(this.getConfig());
-            quanly.setVisible(true);
+            if(quyen ==0){
+                f_quanly quanly = new f_quanly(this.getConfig());
+                quanly.setVisible(true);
+            }
+            else if(quyen == 1){
+                f_nhanvien nhanvien = f_nhanvien.getInstance(conn);
+                nhanvien.setVisible(true);
+            }
         }
         else{
             //this.getConfig().closeConn();
